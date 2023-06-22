@@ -5,12 +5,13 @@ import (
 	"github.com/techschool/pcbook-go/pb"
 )
 
-//NewKeyboard returns a new sample keyboard
+// NewKeyboard returns a new sample keyboard
 func NewKeyboard() *pb.Keyboard {
 	keyboard := &pb.Keyboard{
-		Layout:  pb.Keyboard_Layout(randomKeyboardLayout()),
+		Layout:  randomKeyboardLayout(),
 		Backlit: randomBool(),
 	}
+
 	return keyboard
 }
 

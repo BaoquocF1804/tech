@@ -11,10 +11,11 @@ import (
 )
 
 type LaptopServer struct {
+	Store LaptopStore
 }
 
-func NewLaptopServer() *LaptopServer {
-	return &LaptopServer{}
+func NewLaptopServer(store LaptopStore) *LaptopServer {
+	return &LaptopServer{store}
 }
 
 // CreateLaptop is a unary RPC to create a new laptop
@@ -47,7 +48,7 @@ func (server *LaptopServer) CreateLaptop(
 	//}
 	//
 	// save the laptop to store
-	err := server.
+	err := server.Store.Save(laptop)
 	if err != nil {
 		code := codes.Internal
 		if errors.Is(err, ErrAlreadyExists) {
@@ -56,11 +57,11 @@ func (server *LaptopServer) CreateLaptop(
 
 		return nil, status.Errorf(code, "cannot save laptop to the store: %v", err)
 	}
-	//
-	//log.Printf("saved laptop with id: %s", laptop.Id)
-	//
-	//res := &pb.CreateLaptopResponse{
-	//	Id: laptop.Id,
-	//}
+
+	log.Printf("saved laptop with id: %s", laptop.Id)
+
+	res := &pb.CreateLaptopResponse{
+		Id: laptop.Id,
+	}
 	return res, nil
 }

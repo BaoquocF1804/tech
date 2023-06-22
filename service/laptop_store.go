@@ -11,10 +11,10 @@ import (
 // ErrAlreadyExists is returned when a record with the same ID already exists in the store
 var ErrAlreadyExists = errors.New("record already exists")
 
-type Store interface {
-	//// Save saves the laptop to the store
+type LaptopStore interface {
+	// Save saves the laptop to the store
 	Save(laptop *pb.Laptop) error
-	//// Find finds a laptop by ID
+	// Find finds a laptop by ID
 	//Find(id string) (*pb.Laptop, error)
 	//// Search searches for laptops with filter, returns one by one via the found function
 	//Search(ctx context.Context, filter *pb.Filter, found func(laptop *pb.Laptop) error) error
